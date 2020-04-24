@@ -1,0 +1,12 @@
+import React from 'react'
+import classes from './CountryPicker.module.css';
+
+const CountryPicker = () => {
+  return (
+    <div>
+      <h1>CountryPicker</h1>
+    </div>
+  )
+}
+
+export default CountryPicker
