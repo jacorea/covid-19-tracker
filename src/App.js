@@ -11,6 +11,7 @@ export class App extends Component {
   //don't need constructor anymore
   state = {
     data: {},
+    country: '',
   }
   
   async componentDidMount() {
@@ -18,13 +19,19 @@ export class App extends Component {
     this.setState({ data: fetchedData });
   }
 
+  handleCountryChange = async (countryName) => {
+    //fetch data
+    const fetchedData = await fetchData(countryName);
+    console.log(fetchedData);
+    //setState
+  }
 
   render() {
     const { data } = this.state;
     return (
       <div className={styles.container}>
         <Cards data={data} />
-        <CountryPicker />
+        <CountryPicker handleCountryChange={this.handleCountryChange} />
         <Chart />
       </div>
     )
