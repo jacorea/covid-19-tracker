@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 
+//api
+import { fetchData } from './api/index';
+
 //components
 import { CountryPicker, Chart, Cards } from './components';
 import styles from './App.module.css';
 
-//api
-import { fetchData } from './api/index';
+//images
+import CovidImage from './images/covid.png';
 
 export class App extends Component {
   //don't need constructor anymore
@@ -22,17 +25,18 @@ export class App extends Component {
   handleCountryChange = async (countryName) => {
     //fetch data
     const fetchedData = await fetchData(countryName);
-    console.log(fetchedData);
     //setState
+    this.setState({ data: fetchedData, country: countryName });
   }
 
   render() {
-    const { data } = this.state;
+    const { data, country } = this.state;
     return (
       <div className={styles.container}>
+        <img src={CovidImage} className={styles.image} alt="covid-19" />
         <Cards data={data} />
         <CountryPicker handleCountryChange={this.handleCountryChange} />
-        <Chart />
+        <Chart data={data} country={country}/>
       </div>
     )
   }
